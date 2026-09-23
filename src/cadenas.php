@@ -27,4 +27,6 @@
     
     echo"<br>";
     print_r($d);
+
+    echo "<pre>" . print_r
 ?>

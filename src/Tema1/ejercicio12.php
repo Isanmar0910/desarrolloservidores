@@ -4,4 +4,17 @@
                     "edad" => 22,
                     "curso" => "Matematicas"];
 
-    print_r($estudiante);
+
+
+    echo "<b> Nombre: </b>";
+    print_r($estudiante["nombre"]);
+    
+    
+    echo "<br/> <b> Edad: </b>";
+    print_r($estudiante["edad"]);
+
+
+    echo "<br/> <b> Curso: </b>";
+    print_r($estudiante["curso"]);
+
+    

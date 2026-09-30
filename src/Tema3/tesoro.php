@@ -97,13 +97,22 @@
 
     <!-- Formulario -->
 
-    <form action="tesoro.php" method="get">
+    <form action="procesar.php" method="post">
         <br>
         
         <label for="numero">Posicion</label>
         <input id="numero" type="number" name="posicion" min="1" max="100" autofocus require />
+        <input type="hidden" name="diamante" value="<?php echo $tesoro;?>">
         <button>Enviar</button>
     </form>
+
+    <?php 
+    
+    if (empty($_GET)) {
+        echo "Establece una posicion concreta";
+    }
+    
+    ?>
 </body>
 
 </html>

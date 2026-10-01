@@ -103,14 +103,17 @@
         <label for="numero">Posicion</label>
         <input id="numero" type="number" name="posicion" min="1" max="100" autofocus require />
         <input type="hidden" name="diamante" value="<?php echo $tesoro;?>">
+        <input type="hidden" name="diamante" value="<?php echo $cofre;?>">
+        <input type="hidden" name="diamante" value="<?php echo $trampa;?>">
+        <input type="hidden" name="diamante" value="<?php echo $llave;?>">
         <button>Enviar</button>
     </form>
 
     <?php 
     
-    if (empty($_GET)) {
-        echo "Establece una posicion concreta";
-    }
+    // if (empty($_GET)) {
+    //     echo "Establece una posicion concreta";
+    // }
     
     ?>
 </body>

@@ -173,6 +173,7 @@
     <!-- <br>
     <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a>
     <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a> -->
+    <!-- investiga a ve si se puede pasa un arrai omg con get o post -->
 </body>
 
 </html>

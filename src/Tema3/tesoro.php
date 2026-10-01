@@ -47,48 +47,90 @@
 
                 $fondo = 0;
 
-                $llave = random_int(1, 100);
-                do {
-                    $cofre = random_int(1, 100);
-                } while ($cofre == $llave);
-                do {
-                    $trampa = random_int(1, 100);
-                } while ($trampa == $llave || $trampa == $cofre);
-                do {
-                    $tesoro = random_int(1, 100);
-                } while ($tesoro == $llave || $tesoro == $cofre || $tesoro == $trampa);
+                if (isset($_POST["posicion"])) {
 
-                for ($i = 1; $i <= 100; $i++):
+                    $llave = $_POST["llave"];
+                    $cofre = $_POST["cofre"];
+                    $trampa = $_POST["trampa"];
+                    $tesoro = $_POST["tesoro"];
 
-                    if ($i == $llave) {
-                        $texto = "🔑";
-                    } elseif ($i == $cofre) {
-                        $texto = "🔒";
-                    } elseif ($i == $trampa) {
-                        $texto = "💥";
-                    } elseif ($i == $tesoro) {
-                        $texto = "💎";
-                    } elseif ($i < 10) {
-                        $texto = "00$i";
-                    } elseif ($i < 100) {
-                        $texto = "0$i";
-                    } else {
-                        $texto = "$i";
-                    }
+                    for ($i = 1; $i <= 100; $i++):
 
-                    if ($fondo % 2 == 0) {
-                        echo "<td class=\"" . (($i % 2 == 0) ? "parExotic" : "imparExotic") . "\">$texto</td>\n";
-                    } else {
-                        echo "<td class=\"" . (($i % 2 == 0) ? "par" : "impar") . "\">$texto</td>\n";
-                    }
+                        if ($i == $llave) {
+                            $texto = "🔑";
+                        } elseif ($i == $cofre) {
+                            $texto = "🔒";
+                        } elseif ($i == $trampa) {
+                            $texto = "💥";
+                        } elseif ($i == $tesoro) {
+                            $texto = "💎";
+                        } elseif ($i < 10) {
+                            $texto = "00$i";
+                        } elseif ($i < 100) {
+                            $texto = "0$i";
+                        } else {
+                            $texto = "$i";
+                        }
 
-                    $fondo++;
+                        if ($fondo % 2 == 0) {
+                            echo "<td class=\"" . (($i % 2 == 0) ? "parExotic" : "imparExotic") . "\">$texto</td>\n";
+                        } else {
+                            echo "<td class=\"" . (($i % 2 == 0) ? "par" : "impar") . "\">$texto</td>\n";
+                        }
 
-                    if ($i % 10 == 0 && $i <= 90) {
-                        echo "</tr><tr>";
                         $fondo++;
-                    }
-                endfor;
+
+                        if ($i % 10 == 0 && $i <= 90) {
+                            echo "</tr><tr>";
+                            $fondo++;
+                        }
+                    endfor;
+                }elseif(empty($_POST["posicion"])) {
+
+
+                    $llave = random_int(1, 100);
+                    do {
+                        $cofre = random_int(1, 100);
+                    } while ($cofre == $llave);
+                    do {
+                        $trampa = random_int(1, 100);
+                    } while ($trampa == $llave || $trampa == $cofre);
+                    do {
+                        $tesoro = random_int(1, 100);
+                    } while ($tesoro == $llave || $tesoro == $cofre || $tesoro == $trampa);
+
+                    for ($i = 1; $i <= 100; $i++):
+
+                        if ($i == $llave) {
+                            $texto = "🔑";
+                        } elseif ($i == $cofre) {
+                            $texto = "🔒";
+                        } elseif ($i == $trampa) {
+                            $texto = "💥";
+                        } elseif ($i == $tesoro) {
+                            $texto = "💎";
+                        } elseif ($i < 10) {
+                            $texto = "00$i";
+                        } elseif ($i < 100) {
+                            $texto = "0$i";
+                        } else {
+                            $texto = "$i";
+                        }
+
+                        if ($fondo % 2 == 0) {
+                            echo "<td class=\"" . (($i % 2 == 0) ? "parExotic" : "imparExotic") . "\">$texto</td>\n";
+                        } else {
+                            echo "<td class=\"" . (($i % 2 == 0) ? "par" : "impar") . "\">$texto</td>\n";
+                        }
+
+                        $fondo++;
+
+                        if ($i % 10 == 0 && $i <= 90) {
+                            echo "</tr><tr>";
+                            $fondo++;
+                        }
+                    endfor;
+                }
 
                 ?>
             </tr>
@@ -97,25 +139,40 @@
 
     <!-- Formulario -->
 
-    <form action="procesar.php" method="post">
+    <form action="tesoro.php" method="post">
         <br>
-        
+
         <label for="numero">Posicion</label>
-        <input id="numero" type="number" name="posicion" min="1" max="100" autofocus require />
-        <input type="hidden" name="diamante" value="<?php echo $tesoro;?>">
-        <input type="hidden" name="diamante" value="<?php echo $cofre;?>">
-        <input type="hidden" name="diamante" value="<?php echo $trampa;?>">
-        <input type="hidden" name="diamante" value="<?php echo $llave;?>">
+        <input id="numero" type="number" name="posicion" min="1" max="100" autofocus required />
+        <input type="hidden" name="tesoro" value="<?php echo $tesoro; ?>">
+        <input type="hidden" name="cofre" value="<?php echo $cofre; ?>">
+        <input type="hidden" name="trampa" value="<?php echo $trampa; ?>">
+        <input type="hidden" name="llave" value="<?php echo $llave; ?>">
         <button>Enviar</button>
     </form>
 
-    <?php 
+    <?php
+
+    $intento = $_POST["posicion"] ?? "";
+    $diamante = $_POST["tesoro"] ?? "";
+    $ver = "";
+    $verF = "";
     
-    // if (empty($_GET)) {
-    //     echo "Establece una posicion concreta";
-    // }
-    
+
+    if ($intento == $tesoro) {
+        echo "Enhorabuena has acertado la posicion del diamante W aura 67";
+        $ver = "none";
+    } elseif (empty($intento)) {
+        echo "tienes que asignar un valor";
+    } else {
+        echo "Illo espabila que has fallao";
+    }
+
     ?>
+
+    <!-- <br>
+    <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a>
+    <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a> -->
 </body>
 
 </html>

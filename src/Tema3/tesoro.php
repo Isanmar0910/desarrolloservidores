@@ -174,6 +174,8 @@
     <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a>
     <a href="tesoro.php" style="display: <?php echo $ver; ?>">Intentalo otra ve maquina</a> -->
     <!-- investiga a ve si se puede pasa un arrai omg con get o post -->
+     <a href="http://localhost:8080/Tema3/tesoro.php"><button>Ir a la página</button></a>
+     <button onclick= "location.href = `http://localhost:8080/Tema3/tesoro.php`">aaaaa</button>
 </body>
 
 </html>

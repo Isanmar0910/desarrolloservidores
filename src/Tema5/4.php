@@ -3,11 +3,11 @@
 if (!isset($_COOKIE["fecha"])) {
     $mensaje = "Esta es tu primera visita";
 
-    setcookie("fecha",date('Y-m-d'));
+    setcookie("fecha",date('Y-m-d H:i:s'));
 
 }else {
     $mensaje = "tu ultima visita fue ".$_COOKIE["fecha"];
-    setcookie("fecha",date('Y-m-d'));
+    setcookie("fecha",date('Y-m-d H:i:s'));
 }
 
 ?>

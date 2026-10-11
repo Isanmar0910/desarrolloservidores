@@ -1,17 +1,19 @@
 <?php
 
+session_start();
+
 $fondo = 0;
 $fin = 0;
 $mensaje = "";
 
 // NUEVO: si hay POST pero no hay cookies (caducadas o borradas), se empieza partida nueva
-if (isset($_POST["posicion"]) && isset($_COOKIE["tesoro"])) {
+if (isset($_POST["posicion"]) && isset($_SESSION["tesoro"])) {
 
     // Recuperamos el estado de la partida (NUEVO: las posiciones vienen de cookies)
-    $llave = $_COOKIE["llave"];
-    $cofre = $_COOKIE["cofre"];
-    $trampa = $_COOKIE["trampa"];
-    $tesoro = $_COOKIE["tesoro"];
+    $llave = $_SESSION["llave"];
+    $cofre = $_SESSION["cofre"];
+    $trampa = $_SESSION["trampa"];
+    $tesoro = $_SESSION["tesoro"];
     $inventario = $_POST["inventario"];
     $intento = $_POST["posicion"];
     $descubiertas = $_POST["descubiertas"] ?? [];
@@ -56,10 +58,10 @@ if (isset($_POST["posicion"]) && isset($_COOKIE["tesoro"])) {
 }
 
 // NUEVO: guardamos las posiciones en cookies
-setcookie("llave", $llave);
-setcookie("cofre", $cofre);
-setcookie("trampa", $trampa);
-setcookie("tesoro", $tesoro);
+$_SESSION["llave"]=$llave;
+$_SESSION["cofre"]=$cofre;
+$_SESSION["trampa"]=$trampa;
+$_SESSION["tesoro"]=$tesoro;
 
 ?>
 <!DOCTYPE html>

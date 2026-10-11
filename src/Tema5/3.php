@@ -1,44 +1,84 @@
 <?php
 
-$temas = [
-    "claro"  => ["fondo" => "#F5F7F6", "tinta" => "#1F2933"],
-    "oscuro" => ["fondo" => "#1E2723", "tinta" => "#E8F0EC"],
-    "calido" => ["fondo" => "#FFF1DC", "tinta" => "#653C20"],
-    "frio"   => ["fondo" => "#E8F3F8", "tinta" => "#193A4A"],
-];
+$mensaje = "";
 
-$duracion = time() + 60 * 60 * 24 * 30;
+if (isset($_COOKIE)) {
+    $mensaje = "Ya estas aqui " . $_COOKIE["nombre"];
+}
+
+
+if (isset($_POST["nombre"]) && isset($_POST["tema"])) {
+    $nombre = trim($_POST["nombre"]);
+    $tema = $_POST["tema"];
+
+    if ($nombre != "" && $tema != "") {
+        setcookie("nombre", $nombre, time() + 30 * 24 * 60 * 60);
+        setcookie("tema", $tema, time() + 30 * 24 * 60 * 60);
+
+        header("Location: 3.php");
+    }
+}
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejercicio 03</title>
+    <style>
+        <?php switch ($tema):
+            case 1: ?>body {
+            background-color: #F5F7F6;
+            color: #1F2933;
+        }
+
+        <?php break;
+            case 2: ?>body {
+            background-color: #1E2723;
+            color: #E8F0EC;
+        }
+
+        <?php break;
+            case 3: ?>body {
+            background-color: #FFF1DC;
+            color: #653C20;
+        }
+
+        <?php break;
+            case 4: ?>body {
+            background-color: #E8F3F8;
+            color: #193A4A;
+        }
+
+        <?php break;
+        endswitch; ?>
+    </style>
+
 </head>
 
 <body>
 
-    <form method="post">
-        <label>Nombre:
-            <input type="text" name="nombre" required>
-        </label>
-        <br><br>
-        <label>Tema:
-            <select name="tema">
-                <option value="claro">Claro</option>
-                <option value="oscuro">Oscuro</option>
-                <option value="calido">Cálido</option>
-                <option value="frio">Frío</option>
-            </select>
-        </label>
-        <br><br>
-        <button type="submit" name="guardar">Guardar</button>
+    <p><?= $mensaje ?></p>
+
+    <?php
+    $tema = ["Claro", "Oscuro", "Cálido", "Frío"];
+    ?>
+
+    <form action="3.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text" name="nombre" autofocus required>
+        <br>
+        <label for="tema">Temas:</label>
+        <select name="tema" id="tema">
+            <?php foreach ($tema as $indice => $valor): ?>
+                <option value="<?= $indice ?>"><?= $valor ?></option>
+            <?php endforeach; ?>
+        </select>
+        <br>
+        <button>Enviar</button>
     </form>
-
-
 </body>
 
 </html>

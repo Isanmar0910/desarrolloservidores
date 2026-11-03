@@ -1,0 +1,58 @@
+body {
+    font-family: "Comic Sans MS", cursive;
+    background-color: #fff3e0;
+    color: black;
+    text-align: center;
+}
+
+header {
+    background-color: orange;
+    color: black;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+article {
+    border: 2px dotted darkorange;
+    margin: 10px auto;
+    padding: 5px;
+    max-width: 400px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+table {
+    margin: 0 auto;
+}
+
+th, td {
+    border: 1px solid darkorange;
+    padding: 5px;
+}
+
+button {
+    background-color: orange;
+    border: none;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.ok {
+    color: darkgreen;
+}
+
+.error {
+    color: darkred;
+}

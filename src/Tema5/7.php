@@ -8,10 +8,11 @@ if (empty($_SESSION)) {
     $numero = rand(1, 100);
 
     $_SESSION["numero"] = $numero;
+    $_SESSION["intentos"] = 0;
 } elseif(isset($_POST["intento"])) {
 
     if ($_POST["intento"] == $_SESSION["numero"]) {
-        $mensaje = "HAS GANADO";
+        $mensaje = "HAS GANADO, numero de intentos: ". $_SESSION["intentos"];
 
         $_SESSION = [];
         session_destroy();
@@ -21,9 +22,11 @@ if (empty($_SESSION)) {
 
         if ($_POST["intento"] > $_SESSION["numero"]) {
             $mensaje = "El numero es menor. Intentalo de nuevo";
+            $_SESSION["intentos"]++;
         } elseif ($_POST["intento"] < $_SESSION["numero"]) {
 
             $mensaje = "El numero es mayor. Intentalo de nuevo";
+            $_SESSION["intentos"]++;
         }
     }
 }else{

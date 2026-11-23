@@ -22,40 +22,35 @@ $mensaje = "";
 $error = "";
 
 if (isset($_POST["registrar"])) {
-    try {
-        $nombrePila = htmlspecialchars(trim($_POST["nombrePila"]));
-        $apellidos = htmlspecialchars(trim($_POST["apellidos"]));
-        $telefono = trim($_POST["telefono"]);
-        $email = trim($_POST["email"]);
-        $id = htmlspecialchars(trim($_POST["id"]));
+    $nombrePila = $_POST["nombrePila"];
+    $apellidos = $_POST["apellidos"];
+    $telefono = $_POST["telefono"];
+    $email = $_POST["email"];
+    $id = $_POST["id"];
 
-        if ($nombrePila == "" || $apellidos == "" || $id == "") {
-            throw new InvalidArgumentException("Rellena todos los campos");
-        }
-        if (!ctype_digit($telefono) || strlen($telefono) != 9) {
-            throw new InvalidArgumentException("El teléfono debe tener 9 números");
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException("El email no es válido");
-        }
-
+    if ($nombrePila == "" || $apellidos == "" || $id == "") {
+        $error = "Rellena todos los campos";
+    } elseif (strlen($telefono) != 9) {
+        $error = "El teléfono debe tener 9 números";
+    } elseif (!str_contains($email, "@")) {
+        $error = "El email no es válido";
+    } else {
         $numero = count($_SESSION["huespedes"]) + 1;
         $huesped = new Huesped($numero, $nombrePila, $apellidos, (int)$telefono, $email, $id);
-        $_SESSION["huespedes"][$huesped->numero] = $huesped;
-
+        $_SESSION["huespedes"][$numero] = $huesped;
         $mensaje = "Huésped registrado correctamente";
-    } catch (Exception $e) {
-        $error = $e->getMessage();
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Huéspedes</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
     <header>
         <h1>☆*: .｡. o(≧▽≦)o .｡.:*☆ Hotel Pachuru Buenas noches (●'◡'●)</h1>
@@ -108,4 +103,5 @@ if (isset($_POST["registrar"])) {
         ?>
     </main>
 </body>
+
 </html>

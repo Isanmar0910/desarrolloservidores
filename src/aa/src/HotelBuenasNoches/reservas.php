@@ -47,7 +47,7 @@ if (isset($_POST["reservar"])) {
         $_SESSION["reservas"][$nuevoId] = $reserva;
         $_SESSION["idReserva"] = $nuevoId;
 
-        $mensaje = "Reserva realizada. Importe: " . number_format($reserva->calcularImporte(), 2) . " €";
+        $mensaje = "Reserva realizada. Importe: " .($reserva->calcularImporte()) . " €";
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
@@ -152,9 +152,8 @@ if (isset($_POST["cancelar"])) {
                     <tr>
                         <td><?php echo $reserva->id; ?></td>
                         <td><?php echo $reserva->huesped->nombreCompleto; ?></td>
-                        <td><?php echo $reserva->habitacion->nombre; ?></td>
                         <td><?php echo $reserva->numNoches; ?></td>
-                        <td><?php echo number_format($reserva->calcularImporte(), 2); ?> €</td>
+                        <td><?php echo ($reserva->calcularImporte()); ?> €</td>
                         <td><?php echo $reserva->estado ? "Activa" : "Cancelada"; ?></td>
                         <td>
                             <?php if ($reserva->estado) { ?>

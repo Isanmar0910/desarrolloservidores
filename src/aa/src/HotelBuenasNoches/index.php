@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel del Conde Drácula</title>
+    <title>Hotel illo que susto </title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
